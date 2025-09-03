@@ -10,11 +10,11 @@ export default function Header() {
              <Link to={'/'}>
               Home
            </Link>
+           <Link to={'/shop'}>
+              Shop
+           </Link>
            <Link to={'/about'}>
               About
-           </Link>
-           <Link to={'/course'}>
-              Course
            </Link>
            <Link to={'/contact'}>
               Contact
