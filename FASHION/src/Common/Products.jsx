@@ -1,35 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
 export default function Products() {
+
+  const [allProducts, setAllProducts] = useState([]);
+
+  const getProducts = ()=>{
+    let apiUrl = "https://dummyjson.com/products";
+
+    axios.get(apiUrl).then(
+      (success)=>{
+          setAllProducts(success.data.products)
+      }
+    ).catch(
+      (err)=>{
+        console.log(err)
+      }
+    )
+  }
+
+
+  useEffect(
+    () => {
+      getProducts()
+  },[] 
+)
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        <ProductCard/>
-        
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-4">
+        {
+          allProducts.map(
+            (product, index) => {
+              return  (
+                <ProductCard key={index} product={product}/>
+            )
+            }
+          )
+        }
+          
 </div>
 
   )
 }
 
-function ProductCard() {
+function ProductCard({product}) {
+  console.log(product)
     return (
           
-  <div className="mt-4 max-w-sm bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+  <div className="mt-4 max-w-sm bg-white border rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
 
   <img
-    className="w-full h-48 object-cover rounded-xl mb-4"
-    src="https://via.placeholder.com/300x200"
+    className="w-full h-52 object-cover rounded-xl mb-4"
+    src={product.thumbnail}
     alt="Product Image"
   />
   <div className="p-4">
-    <h2 className="text-xl font-semibold text-gray-800">Product Title</h2>
+    <h2 className="text-xl font-semibold text-gray-800">{product.title}</h2>
    
-    <p className="text-green-600 font-bold text-xl mb-2">$49.99</p>
+    <p className="text-green-600 font-bold text-xl mb-2">{product.price}</p>
     <p className="text-gray-700 mb-2">
-      Rating: <span className="font-semibold">4.5/5</span>
+      Rating: <span className="font-semibold">{product.rating}</span>
     </p>
 
-      <p className='tect-sm text-gray-500'>Category: Electronics</p>
-      <p className='tect-sm text-gray-500'>Brand: ABC</p>
+      <p className='tect-sm text-gray-500'>{product.category}</p>
+      <p className='tect-sm text-gray-500'>{product.brand}</p>
     
     <button className='bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white'>Add to Card</button>
   </div>

@@ -20,7 +20,7 @@ export default function App() {
             element: <Home/>
           },
               {
-            path: "/shop",
+            path: "/shop/:slug?",
             element: <Shop/>
           },
           {
