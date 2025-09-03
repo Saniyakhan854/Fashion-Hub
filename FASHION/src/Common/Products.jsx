@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
-export default function Products() {
+export default function Products({slug}) {
 
   const [allProducts, setAllProducts] = useState([]);
 
   const getProducts = ()=>{
     let apiUrl = "https://dummyjson.com/products";
+
+    if(slug != undefined){
+      apiUrl = `https://dummyjson.com/products/categories/${slug}`
+    }
 
     axios.get(apiUrl).then(
       (success)=>{
@@ -22,8 +26,8 @@ export default function Products() {
 
   useEffect(
     () => {
-      getProducts()
-  },[] 
+      getProducts();
+  }, [slug] 
 )
 
   return (
@@ -44,7 +48,7 @@ export default function Products() {
 }
 
 function ProductCard({product}) {
-  console.log(product)
+  
     return (
           
   <div className="mt-4 max-w-sm bg-white border rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">

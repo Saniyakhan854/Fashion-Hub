@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 
 export default function Filter() {
@@ -36,7 +37,10 @@ export default function Filter() {
                     allCategories.map(
                         (data, index)=>{
                             return (
-                                <div className='border rounded-lg px-4 my-2 py-2 cursor-pointer' key={index}>{data.name}</div>
+                                <Link to={`/shop/${data.slug}`}>
+                                       <div className='border rounded-lg px-4 my-2 py-2 cursor-pointer' key={index}>{data.name}</div>
+                                </Link>
+
                             )
                         }
                     )
