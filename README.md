@@ -1,2 +1,2 @@
 # Fashion-Hub
-Fashion-Hub: A website for modern women’s fashion and style inspiration.
+Fashion-Hub: A website for modern fashion and style inspiration.
