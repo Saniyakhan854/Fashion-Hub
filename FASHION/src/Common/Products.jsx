@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import ProductDetail from '../Pages/ProductDetail';
+import { Link } from 'react-router-dom';
 
 export default function Products({slug}) {
   
@@ -65,24 +67,27 @@ function ProductCard({product}) {
           
   <div className="mt-4 max-w-sm bg-white border rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
 
-  <img
-    className="w-full h-52 object-cover rounded-xl mb-4"
-    src={product.thumbnail}
-    alt="Product Image"
-  />
-  <div className="p-4">
-    <h2 className="text-xl font-semibold text-gray-800">{product.title}</h2>
-   
-    <p className="text-green-600 font-bold text-xl mb-2">{product.price}</p>
-    <p className="text-gray-700 mb-2">
-      Rating: <span className="font-semibold">{product.rating}</span>
-    </p>
+      <Link to={`/productdetail/${product.id}`}>
+          <img
+              className="w-full h-52 object-cover rounded-xl mb-4"
+              src={product.thumbnail}
+              alt="Product Image"
+              />
+            <div className='p-4'>
+              <h2 className="text-xl font-semibold text-gray-800">{product.title}</h2>
+            
+              <p className="text-green-600 font-bold text-xl mb-2">{product.price}</p>
+              <p className="text-gray-700 mb-2">
+                Rating: <span className="font-semibold">{product.rating}</span>
+              </p>
 
-      <p className='tect-sm text-gray-500'>{product.category}</p>
-      <p className='tect-sm text-gray-500'>{product.brand}</p>
+                <p className='tect-sm text-gray-500'>{product.category}</p>
+                <p className='tect-sm text-gray-500'>{product.brand}</p>
+              </div>
+    </Link>
     
     <button className='bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white'>Add to Card</button>
   </div>
-</div>
+
     )
 }

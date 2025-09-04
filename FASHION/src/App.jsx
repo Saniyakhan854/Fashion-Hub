@@ -5,6 +5,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom'
 import Contact from './Pages/Contact'
 import Layout from './Layout'
 import Shop from './Pages/Shop'
+import ProductDetail from './Pages/ProductDetail'
 
 
 export default function App() {
@@ -30,6 +31,10 @@ export default function App() {
           {
             path: "/contact",
             element: <Contact/>
+          },
+           {
+            path: "/productdetail/:id",
+            element: <ProductDetail/>
           }
         ]
       },
