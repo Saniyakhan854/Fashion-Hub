@@ -40,7 +40,7 @@ export default function Products({slug}) {
 
   return (
     <>
-    <h2 className='m-3'>Total Product: {allProducts.length}</h2>
+    <h2 className='mx-3 mt-3'>Total Product: {allProducts.length}</h2>
     <main className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         {
           allProducts.map(
@@ -86,7 +86,7 @@ function ProductCard({product}) {
               </div>
     </Link>
     
-    <button className='bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white'>Add to Card</button>
+    <button className='bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white ml-4 mb-2'>Add to Card</button>
   </div>
 
     )
