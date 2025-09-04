@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 
-export default function Filter() {
+export default function Filter({ slug}) {
 
     const [allCategories, setAllCategories] = useState([]);
 
@@ -20,6 +20,7 @@ export default function Filter() {
             }
         )
     }
+   
 
     useEffect(
         () => {
@@ -28,25 +29,34 @@ export default function Filter() {
     )
 
   return (
-    <div>
-        <div className='m-3'>
-            <h1 className='text-2xl'>Filter by Category</h1>
-            <div>
-                 <div className='bg-blue-500 text-white border rounded-lg px-4 my-2 py-2 cursor-pointer'>ALl Categoruries</div>
+    <>
+        <div className='mx-2'>
+            <h1 className='text-2xl my-3'>Filter by Category</h1>
+            <Link to={'/shop'}>
+                <div className={`  border rounded-lg px-4 
+                  ${slug == undefined ? 'bg-blue-500 text-white' : ''}    my-2 py-2 cursor-pointer`}>ALl Categoruries
+                 </div>
+            </Link>
+            
+                
+               <div> 
                 {
                     allCategories.map(
-                        (data, index)=>{
+                        (categoryData, index)=>{
+                            
                             return (
-                                <Link to={`/shop/${data.slug}`}>
-                                       <div className='border rounded-lg px-4 my-2 py-2 cursor-pointer' key={index}>{data.name}</div>
+                                <Link to={`/shop/${categoryData.slug}`}>
+                                       <div className={`border rounded-lg px-4 my-2 py-2 cursor-pointer ${categoryData.slug == slug ? 'bg-blue-500 text-white' : ''}`}
+                                        key={index}>{categoryData.name}
+                                        </div>
                                 </Link>
 
                             )
                         }
                     )
                 }
-            </div>
+            </div> 
         </div>
-    </div>
+    </>
   )
 }

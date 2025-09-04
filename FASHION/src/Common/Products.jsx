@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 export default function Products({slug}) {
+  
 
   const [allProducts, setAllProducts] = useState([]);
+  const [limit, setLimit] = useState(30);
 
   const getProducts = ()=>{
-    let apiUrl = "https://dummyjson.com/products";
+    let apiUrl
 
-    if(slug != undefined){
-      apiUrl = `https://dummyjson.com/products/categories/${slug}`
+    if(slug == undefined){
+      apiUrl = `https://dummyjson.com/products?limit=${limit}`;
+    }else{
+            apiUrl = `https://dummyjson.com/products/category/${slug}?limit=${limit}`
     }
 
     axios.get(apiUrl).then(
@@ -27,11 +31,15 @@ export default function Products({slug}) {
   useEffect(
     () => {
       getProducts();
-  }, [slug] 
+  }, [slug, limit] 
 )
 
+
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 p-4">
+    <>
+    <h2 className='m-3'>Total Product: {allProducts.length}</h2>
+    <main className="grid grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         {
           allProducts.map(
             (product, index) => {
@@ -42,8 +50,12 @@ export default function Products({slug}) {
           )
         }
           
-</div>
-
+    </main>
+<div className='text-center'>
+      <button className='bg-blue-500 hover:bg-blue-600 px-4 py-2
+       rounded-md text-white' onClick={()=>setLimit(limit + 20)}>Load More</button>
+</div><br /><br />
+  </>
   )
 }
 

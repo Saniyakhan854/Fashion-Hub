@@ -12,7 +12,7 @@ export default function Shop() {
   return (
     <div className='grid grid-cols-6 '>
         <div className='col-span-1 '>
-             <Filter/>
+             <Filter slug={slug}/>
         </div>
         <div className='col-span-5 bg-gray-100'>
             <Products slug={slug}/>
