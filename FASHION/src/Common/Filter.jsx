@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 
-export default function Filter({ slug}) {
+export default function Filter({ slug , setRating}) {
 
     const [allCategories, setAllCategories] = useState([]);
 
@@ -30,6 +30,15 @@ export default function Filter({ slug}) {
 
   return (
     <>
+         <div className='mx-2'>
+            <h1 className='text-2xl my-3'>Filter by Rating</h1>
+          <div>
+                <div onClick={()=> setRating(4)} className='py-2 border rounded-lg cursor-pointer p-2 my-2'>4 ⭐ & Above</div>
+                <div onClick={()=> setRating(3)} className='py-2 border rounded-lg cursor-pointer p-2 my-2'>3 ⭐ & Above</div>
+                <div onClick={()=> setRating(2)} className='py-2 border rounded-lg cursor-pointer p-2 my-2'>2 ⭐ & Above</div>
+                <div onClick={()=> setRating(1)} className='py-2 border rounded-lg cursor-pointer p-2 my-2'>1 ⭐ & Above</div>
+          </div>
+        </div>
         <div className='mx-2'>
             <h1 className='text-2xl my-3'>Filter by Category</h1>
             <Link to={'/shop'}>

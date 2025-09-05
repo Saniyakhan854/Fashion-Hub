@@ -3,7 +3,7 @@ import axios from 'axios';
 import ProductDetail from '../Pages/ProductDetail';
 import { Link } from 'react-router-dom';
 
-export default function Products({slug}) {
+export default function Products({slug , rating}) {
   
 
   const [allProducts, setAllProducts] = useState([]);
@@ -20,7 +20,13 @@ export default function Products({slug}) {
 
     axios.get(apiUrl).then(
       (success)=>{
-          setAllProducts(success.data.products)
+        const finalData = success.data.products.filter(
+          (data, index)=>{
+            if(data.rating >= rating)
+            return true
+          }
+        )
+          setAllProducts(finalData)
       }
     ).catch(
       (err)=>{
@@ -33,7 +39,7 @@ export default function Products({slug}) {
   useEffect(
     () => {
       getProducts();
-  }, [slug, limit] 
+  }, [slug, limit, rating] 
 )
 
 
