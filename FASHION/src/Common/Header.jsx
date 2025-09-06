@@ -4,7 +4,7 @@ import { Context } from '../Pages/MainContext'
 
 export default function Header() {
 
-const {cart } = useContext(Context)
+const {cart, setCart } = useContext(Context)
 
   return (
       <header className="bg-blue-600 text-white shadow sticky top-0 p-4">
@@ -23,9 +23,9 @@ const {cart } = useContext(Context)
            <Link to={'/contact'}>
               Contact
            </Link>
-           <Link to={'/shop'}>
+           
               <button className='bg-orange-500 hover:bg-orange-600 p-2 px-3 rounded-lg'>Cart ({cart})</button>
-           </Link>
+             <button onClick={()=>{setCart(0)}} className='bg-gray-500 hover:bg-gray-600 p-2 px-3 rounded-lg'>Clear Cart)</button>
           </nav>
           
         </div>

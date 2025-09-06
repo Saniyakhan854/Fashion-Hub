@@ -83,7 +83,7 @@ function ProductCard({product, cart, setCart}) {
             <div className='p-4'>
               <h2 className="text-xl font-semibold text-gray-800">{product.title}</h2>
             
-              <p className="text-green-600 font-bold text-xl mb-2">{product.price}</p>
+              <p className="text-green-600 font-bold text-xl mb-2">${product.price}</p>
               <p className="text-gray-700 mb-2">
                 Rating: <span className="font-semibold">{product.rating}</span>
               </p>

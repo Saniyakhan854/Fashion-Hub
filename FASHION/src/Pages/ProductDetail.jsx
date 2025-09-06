@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from "axios";
 import { useParams } from 'react-router-dom';
+import { Context } from './MainContext';
 
 export default function ProductDetail() {
+  const {cart, setCart} = useContext(Context)
     const { id } = useParams();
     const [currentProduct, setCurrentProduct] = useState({})
     
@@ -63,7 +65,7 @@ export default function ProductDetail() {
       <p className="text-gray-700 mb-6">
         {currentProduct.description}
       </p>
-      <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+      <button onClick={()=>{setCart(cart + 1) }} className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
         Add to Cart
       </button>
     </div>
