@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import ProductDetail from '../Pages/ProductDetail';
 import { Link } from 'react-router-dom';
+import { Context } from '../Pages/MainContext';
 
 export default function Products({slug , rating, price}) {
   
-
+const {cart, setCart } = useContext(Context)
   const [allProducts, setAllProducts] = useState([]);
   const [limit, setLimit] = useState(30);
 
@@ -52,7 +53,7 @@ export default function Products({slug , rating, price}) {
           allProducts.map(
             (product, index) => {
               return  (
-                <ProductCard key={index} product={product}/>
+                <ProductCard key={index} product={product} cart={cart} setCart={setCart}/>
             )
             }
           )
@@ -67,7 +68,7 @@ export default function Products({slug , rating, price}) {
   )
 }
 
-function ProductCard({product}) {
+function ProductCard({product, cart, setCart}) {
   
     return (
           
@@ -92,7 +93,7 @@ function ProductCard({product}) {
               </div>
     </Link>
     
-    <button className='bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white ml-4 mb-2'>Add to Card</button>
+    <button onClick={()=>setCart(cart +1)} className='bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white ml-4 mb-2'>Add to Card</button>
   </div>
 
     )
