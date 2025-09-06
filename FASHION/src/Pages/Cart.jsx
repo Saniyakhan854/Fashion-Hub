@@ -1,14 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Footer from '../Common/Footer'
 import Header from '../Common/Header'
+import { Context } from './MainContext'
 
 export default function Cart() {
+
+    const {cart, setCart } = useContext(Context)
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
   {/* Left Side - Cart Items */}
   <div className="md:col-span-2 space-y-4">
-   <CartRow/>
-    <CartRow/>
+    {
+        cart.map(
+            (cartData, cartIndex)=>{
+                return (
+                     <CartRow cartData={cartData} cartIndex={cartIndex}/>
+                )
+            }
+        )
+    }
+  
    
   </div>
 
@@ -36,24 +48,24 @@ export default function Cart() {
   )
 }
 
-function CartRow(){
+function CartRow({cartData}){
     return (
     <div className="flex items-center p-4 gap-4 border  rounded-xl shadow-sm">
       <img
-        src="https://via.placeholder.com/100"
+        src={cartData.thumbnail}
         alt="Product"
         className="w-24 h-24 object-cover rounded-xl"
       />
       <div className="flex-1">
-        <h2 className="font-semibold text-lg">Wireless Headphones</h2>
-        <p className="text-sm text-gray-500">Electronics</p>
-        <p className="text-gray-700 font-medium">₹1999</p>
+        <h2 className="font-semibold text-lg">{cartData.title}</h2>
+        <p className="text-sm text-gray-500">{cartData.category}</p>
+        <p className="text-gray-700 font-medium">${cartData.price}</p>
       </div>
       <div className="mt-2">
        <label className='text-sm text-gray-700 mr-2'>Quantity:</label>
        <input
             type='number' 
-            defaultValue={1}
+            defaultValue={cartData.qty}
             min={1}
             className='w-16 px-2 py-1 border rounded-md'
        />

@@ -69,6 +69,13 @@ const {cart, setCart } = useContext(Context)
 }
 
 function ProductCard({product, cart, setCart}) {
+
+  const addToCart = ()=>{
+    const {id, category, title, price, thumbnail} = product;
+    const producDetail = {id, category, title, price, thumbnail, qty: 1};
+    const finalData = [...cart, producDetail]
+    setCart(finalData)
+  }
   
     return (
           
@@ -93,7 +100,7 @@ function ProductCard({product, cart, setCart}) {
               </div>
     </Link>
     
-    <button onClick={()=>setCart(cart +1)} className='bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white ml-4 mb-2'>Add to Card</button>
+    <button onClick={addToCart} className='bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md text-white ml-4 mb-2'>Add to Card</button>
   </div>
 
     )

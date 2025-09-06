@@ -4,7 +4,7 @@ export const Context = createContext();
 
 export default function MainContext({children}) {
  
-  const [cart, setCart] = useState(0)
+  const [cart, setCart] = useState([])
  
   return (
     <>
