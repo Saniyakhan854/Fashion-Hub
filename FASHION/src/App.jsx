@@ -7,6 +7,7 @@ import Layout from './Layout'
 import Shop from './Pages/Shop'
 import ProductDetail from './Pages/ProductDetail'
 import MainContext from './Pages/MainContext'
+import Cart from './Pages/Cart'
 
 
 export default function App() {
@@ -26,6 +27,11 @@ export default function App() {
             element: <Shop/>
           },
           {
+            path: "/cart",
+            element: <Cart/>
+          },
+
+          {
             path: "/about",
             element: <About/>
           },
@@ -33,6 +39,7 @@ export default function App() {
             path: "/contact",
             element: <Contact/>
           },
+          
            {
             path: "/productdetail/:id",
             element: <ProductDetail/>

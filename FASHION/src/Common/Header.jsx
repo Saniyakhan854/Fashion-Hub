@@ -23,8 +23,11 @@ const {cart, setCart } = useContext(Context)
            <Link to={'/contact'}>
               Contact
            </Link>
-           
-              <button className='bg-orange-500 hover:bg-orange-600 p-2 px-3 rounded-lg'>Cart ({cart})</button>
+          
+           <Link to={'/cart'}>
+              <button className='bg-orange-500 hover:bg-orange-600 p-2 px-3 rounded-lg'>Cart ({cart})</button>              
+           </Link>
+
              <button onClick={()=>{setCart(0)}} className='bg-gray-500 hover:bg-gray-600 p-2 px-3 rounded-lg'>Clear Cart)</button>
           </nav>
           
