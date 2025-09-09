@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import Footer from '../Common/Footer'
 import Header from '../Common/Header'
 import { Context } from './MainContext'
+import ProductDetail from './ProductDetail'
+import { Link } from 'react-router-dom'
 
 export default function Cart() {
 
@@ -12,15 +14,20 @@ export default function Cart() {
   {/* Left Side - Cart Items */}
   <div className="md:col-span-2 space-y-4">
     {
+
+      cart.length == 0 
+      ? 
+      <h1 className='text-center text-5xl'>No Item Found</h1>
+       :
         cart.map(
             (cartData, cartIndex)=>{
                 return (
-                     <CartRow cartData={cartData} cartIndex={cartIndex}/>
+                     <CartRow cartData={cartData} cartIndex={cartIndex} key={cartIndex} cart={cart} setCart={setCart}/>
                 )
             }
         )
     }
-  
+
    
   </div>
 
@@ -48,7 +55,15 @@ export default function Cart() {
   )
 }
 
-function CartRow({cartData}){
+function CartRow({cartData, cartIndex, cart, setCart}){
+
+  const deleteCartRow = (index)=>{
+    const cartData = [...cart];
+    cartData.splice(index, 1);
+    setCart(cartData)
+  }
+ 
+  
     return (
     <div className="flex items-center p-4 gap-4 border  rounded-xl shadow-sm">
       <img
@@ -57,9 +72,12 @@ function CartRow({cartData}){
         className="w-24 h-24 object-cover rounded-xl"
       />
       <div className="flex-1">
+        <Link to={`/productdetail/${cartData.id}`}>
         <h2 className="font-semibold text-lg">{cartData.title}</h2>
+        </Link>
         <p className="text-sm text-gray-500">{cartData.category}</p>
         <p className="text-gray-700 font-medium">${cartData.price}</p>
+     
       </div>
       <div className="mt-2">
        <label className='text-sm text-gray-700 mr-2'>Quantity:</label>
@@ -71,7 +89,7 @@ function CartRow({cartData}){
        />
       </div>
       <div>
-        <button className='py-2 px-3 bg-red-500 hover:bg-red-600 text-white rounded-lg'>Remove</button>
+        <button onClick={()=>deleteCartRow(cartIndex)} className='py-2 px-3 bg-red-500 hover:bg-red-600 text-white rounded-lg'>Remove</button>
       </div>
     </div>
     )
