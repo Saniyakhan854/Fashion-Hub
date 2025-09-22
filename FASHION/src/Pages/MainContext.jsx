@@ -1,10 +1,17 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 
 export const Context = createContext();
 
 export default function MainContext({children}) {
- 
-  const [cart, setCart] = useState([])
+
+  const oldCartData = JSON.parse(localStorage.getItem("CART")) ?? [];
+  const [cart, setCart] = useState(oldCartData);
+
+  useEffect(
+    () => {
+      localStorage.setItem("CART", JSON.stringify(cart))
+    } , [cart]
+  )
  
   return (
     <>
